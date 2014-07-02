@@ -3,12 +3,22 @@ starSmash
 
 multiplayer 2d rts using node.js and javascript canvas
 
+Credit
+======
+I have used some wonderful sprites from: http://millionthvector.blogspot.co.uk/p/free-sprites.html Thanks so much for the beautiful art!
 
-nGinx Config
+Using this code
+===============
+If you want to contribute to this code, that's brilliant! Just open a PR that'd be amazing.
+
+If you want to use this code for your own project, that's brilliant! I would love to know about what you're building, and maybe we could talk about changes we could both make to suit both projects! Some credit somewhere would be nice too, of course!
+
+
+nginx config
 ============
 ```conf
 server {
-    root   /home/phil/projects/starSmash/public_html;
+    root   /path/to/starSmash/public_html;
     index index.php
     listen 80;
     server_name starsmash.com.dev www.starsmash.com.dev;
@@ -28,7 +38,7 @@ server {
     #
     location ~ \.(php) {
         fastcgi_pass  127.0.0.1:9000;
-        fastcgi_param SCRIPT_FILENAME /home/phil/projects/starSmash/public_html/index.php;
+        fastcgi_param SCRIPT_FILENAME /path/to/starSmash/public_html/index.php;
         fastcgi_param PHP_VALUE "include_path=./:/usr/share/php:/usr/share/pear";
         include fastcgi_params;
     }
