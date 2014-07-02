@@ -3,6 +3,10 @@ starSmash
 
 multiplayer 2d rts using node.js and javascript canvas
 
+Credit
+======
+I have used some wonderful sprites from: http://millionthvector.blogspot.co.uk/p/free-sprites.html Thanks so much for the beautiful art!
+
 Using this code
 ===============
 If you want to contribute to this code, that's brilliant! Just open a PR that'd be amazing.
