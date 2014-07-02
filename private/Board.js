@@ -23,6 +23,14 @@ Board.prototype = {
 			this.stars.push(star);
 		}
 		return this.stars;
+	},
+	startingPosition: function(index){
+		switch(index){
+			case 0:
+				return {"x": 50, "y": 50};
+			case 1:
+				return {"x": this.width - 50, "y": this.height - 50};
+		}
 	}
 }
 

@@ -67,6 +67,5 @@ config = {
 
 
 var server = ws.createServer(function(sock){
-	console.log("new connection");
 	Server.newConnection(sock);
 }).listen(Server.socket);

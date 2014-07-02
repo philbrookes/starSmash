@@ -30,12 +30,6 @@ Client.prototype = {
 		data.position = pos;
 		this.sendCommand(data);
 	},
-	setName: function(name){
-		var data = {};
-		data.command = "name";
-		data.name = name;
-		this.sendCommand(data);
-	},
 	processCommand: function(evt){
 		console.log(evt);
 		var data = JSON.parse(evt.data);
@@ -46,9 +40,6 @@ Client.prototype = {
 				break;
 			case "starmap":
 				this.starmap(data.data);
-				break;
-			case "name":
-				this.nameResponse(data.data);
 				break;
 		}
 	},
@@ -76,14 +67,5 @@ Client.prototype = {
 	},
 	starmap: function(data){
 
-	},
-	nameResponse: function(data){
-		if(data.status == "ok"){
-			$("#modal-border").fadeOut();
-		} else {
-			$("#modal-error").html("bad username, please retry!");
-			$("#modal-error").show();
-			$("#modal-error").fadeOut(1000);
-		}
 	}
 }

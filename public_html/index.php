@@ -21,14 +21,6 @@
 					width: 640px; 
 					height: 480px;"
 			></canvas>
-			<div id="modal-border" style="display: block;">
-				<div id="modal">
-					<span class="modal-header">Set name: </span>
-					<span class="modal-error" id="modal-error"></span>
-					<span class="text"><input type="text" id="name" /></span>
-					<span class="modal-button" id="set-name">set</span>
-				</div>
-			</div>
 		</div>
 	</body>
 </html>

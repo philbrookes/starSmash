@@ -4,10 +4,6 @@ $(document).ready(function(){
 	game = new Game();
 	client = new Client(game);
 	renderTick();
-
-	$("#set-name").click(function(){
-		client.setName($("#name").val());
-	});
 });
 function renderTick(){
 	renderer.render(game)
