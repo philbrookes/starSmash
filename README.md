@@ -3,6 +3,12 @@ starSmash
 
 multiplayer 2d rts using node.js and javascript canvas
 
+Using this code
+===============
+If you want to contribute to this code, that's brilliant! Just open a PR that'd be amazing.
+
+If you want to use this code for your own project, that's brilliant! I would love to know about what you're building, and maybe we could talk about changes we could both make to suit both projects! Some credit somewhere would be nice too, of course!
+
 
 nginx config
 ============
