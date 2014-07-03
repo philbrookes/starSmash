@@ -22,18 +22,19 @@ Board.prototype = {
 		return this.stars;
 	},
 	startingPosition: function(index){
+    var pos;
 		switch(index){
 			case '0':
-				var pos = {"x": 50, "y": 50};
+				 pos = {"x": 50, "y": 50};
 				break;
 			case '1':
-				var pos =  {"x": this.width - 50, "y": this.height - 50};
+				 pos =  {"x": this.width - 50, "y": this.height - 50};
 				break;
 			case '2':
-				var pos =  {"x": this.width - 50, "y": 50};
+				 pos =  {"x": this.width - 50, "y": 50};
 				break;
 			case '3':
-				var pos =  {"x": 50, "y": this.height - 50};
+				 pos =  {"x": 50, "y": this.height - 50};
 				break;
 		}
 		return pos;
