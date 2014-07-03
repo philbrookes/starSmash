@@ -26,7 +26,7 @@ Player.prototype = {
 		return this.id + "_" + unitType.substr(0, 3) + "_" + this.shipIdTracker++;
 	},
 	grantUnit: function(unitType, pos){
-		if(typeof pos == "undefined"){
+		if(typeof pos === "undefined"){
 			pos = this.hq.position;
 		}
 		var ship = config.ship[unitType];
@@ -42,6 +42,9 @@ Player.prototype = {
 			this.send({"command": "build", "data": {"status": "fail"}});
 			return;
 		}
+		console.log(this.id + " building a " + unitType);
+		console.log(this.hq.position);
+
 		this.hq.resources -= config.ship[unitType].cost;
 		
 		var ship = this.grantUnit(unitType);

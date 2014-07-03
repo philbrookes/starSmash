@@ -31,9 +31,7 @@ Client.prototype = {
 		this.sendCommand(data);
 	},
 	processCommand: function(evt){
-		console.log(evt);
 		var data = JSON.parse(evt.data);
-		console.log(data);
 		switch(data.command){
 			case "updateUnit":
 				this.updateUnit(data.data);
@@ -44,10 +42,8 @@ Client.prototype = {
 		}
 	},
 	updateUnit: function(data){
-		console.log(data);
 		var item = this.game.getItem(data.id);
 		if(! item){
-			console.log("couldn't find item");
 			var item = new Item(data.id);
 			this.game.addItem(item);
 		}

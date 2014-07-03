@@ -19,7 +19,6 @@ Server.newConnection = function(sock){
 Server.findGame = function(){
 	var retGame = false;
 	Server.games.forEach(function(game, index){
-		console.log(game.state + " ?? " + Game.PREPARING);
 		if(game.state === Game.PREPARING){
 			retGame = game;
 		}
@@ -27,7 +26,6 @@ Server.findGame = function(){
 	if(retGame){
 		return retGame;
 	}
-	console.log("creating new game!");
 	var game = new Game();
 	Server.games.push(game);
 	return game;

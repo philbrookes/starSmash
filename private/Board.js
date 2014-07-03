@@ -9,9 +9,6 @@ function Board(width, height, numStars){
 }
 
 Board.prototype = {
-	output: function() {
-		console.log("test");
-	},
 	generateStars: function() {
 		for(var i=0;i<this.numStars;i++){
 			var pos = new Position(
@@ -26,11 +23,20 @@ Board.prototype = {
 	},
 	startingPosition: function(index){
 		switch(index){
-			case 0:
-				return {"x": 50, "y": 50};
-			case 1:
-				return {"x": this.width - 50, "y": this.height - 50};
+			case '0':
+				var pos = {"x": 50, "y": 50};
+				break;
+			case '1':
+				var pos =  {"x": this.width - 50, "y": this.height - 50};
+				break;
+			case '2':
+				var pos =  {"x": this.width - 50, "y": 50};
+				break;
+			case '3':
+				var pos =  {"x": 50, "y": this.height - 50};
+				break;
 		}
+		return pos;
 	}
 }
 
