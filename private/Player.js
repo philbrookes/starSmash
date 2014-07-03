@@ -27,7 +27,7 @@ Player.prototype = {
 		return this.id + "_" + unitType.substr(0, 3) + "_" + this.shipIdTracker++;
 	},
 	grantUnit: function(unitType, pos){
-		if(typeof pos === "undefined"){
+		if(pos === undefined){
 			pos = this.hq.position;
 		}
 		var ship = config.ship[unitType];

@@ -37,7 +37,7 @@ Game.prototype = {
 				"headquarters"
 				, this.board.startingPosition(i)
 			);
-			player.hq.position = this.board.startingPosition(i);
+
 			console.log("player " + player.id);
 			console.log(player.hq.position);
 			this.sendToPlayers({"command": "updateUnit", "data": player.hq});
