@@ -1,4 +1,4 @@
-var Game = require('./Game.js');
+  var Game = require('./Game.js');
 var Server = require('./Server.js');
 var ws   = require("nodejs-websocket");
 

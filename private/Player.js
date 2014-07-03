@@ -1,4 +1,5 @@
 var plyrId = 1;
+var Server = require('./Server.js');
 Player = function(socket) {
 	this.id = plyrId++;
 	this.shipIdTracker = 1;
@@ -6,7 +7,7 @@ Player = function(socket) {
 	this.sock = socket;
 	
 	this.game = null;
-	this.army = new Array();
+	this.army =[];
 	this.hq = {};
 	this.resources = 0;
 
@@ -16,7 +17,7 @@ Player = function(socket) {
 	this.sock.on("text", function(evt){
 		Server.handleInput(me, evt);
 	});
-}
+};
 
 Player.prototype = {
 	send: function(data) {
@@ -56,6 +57,6 @@ Player.prototype = {
 		this.game.sendToPlayers({"command": "updateUnit", "data": ship});
 		return ship;
 	}
-}
+};
 
 module.exports = Player;
