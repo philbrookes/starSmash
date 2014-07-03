@@ -29,23 +29,23 @@ Game.prototype = {
 	},
 	startGame: function(){
 		this.state = Game.RUNNING;
-for(var index in this.players){
-	var player = this.players[index];
-	player.hq = player.grantUnit(
-		"headquarters"
-		, this.board.startingPosition(index)
-	);
-	player.hq.position = this.board.startingPosition(index);
-	console.log("player " + player.id);
-	console.log(player.hq.position);
-	this.sendToPlayers({"command": "updateUnit", "data": player.hq});
-};
+		for(var index in this.players){
+			var player = this.players[index];
+			player.hq = player.grantUnit(
+				"headquarters"
+				, this.board.startingPosition(index)
+			);
+			player.hq.position = this.board.startingPosition(index);
+			console.log("player " + player.id);
+			console.log(player.hq.position);
+			this.sendToPlayers({"command": "updateUnit", "data": player.hq});
+		};
 
-for(var index in this.players){
-	var player = this.players[index];
-	console.log("player " + player.id);
-	console.log(player.hq.position);
-}
+		for(var index in this.players){
+			var player = this.players[index];
+			console.log("player " + player.id);
+			console.log(player.hq.position);
+		}
 	}
 
 }
