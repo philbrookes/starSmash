@@ -1,8 +1,8 @@
 var Board = require("./Board.js");
 
 Game = function() {
-	this.players = new Array();
-	this.spectators = new Array();
+	this.players = [];
+	this.spectators = [];
 	this.board = new Board(640, 480, 250);
 	this.numPlayers = 2;
 	this.state = Game.PREPARING;
@@ -18,7 +18,7 @@ Game.prototype = {
 		this.players.push(player);
 		player.game = this;
 
-		if(this.players.length == this.numPlayers){
+		if(this.players.length === this.numPlayers){
 			this.startGame();
 		}
 	},
@@ -29,20 +29,22 @@ Game.prototype = {
 	},
 	startGame: function(){
 		this.state = Game.RUNNING;
-		for(var index in this.players){
-			var player = this.players[index];
-			player.hq = player.grantUnit(
+    var player;
+    var i;
+		for( i=0; i < this.players.length; i++ ){
+			 player = this.players[i];
+			 player.hq = player.grantUnit(
 				"headquarters"
-				, this.board.startingPosition(index)
+				, this.board.startingPosition(i)
 			);
-			player.hq.position = this.board.startingPosition(index);
+
 			console.log("player " + player.id);
 			console.log(player.hq.position);
 			this.sendToPlayers({"command": "updateUnit", "data": player.hq});
 		};
 
-		for(var index in this.players){
-			var player = this.players[index];
+		for(i =0; i < this.players.length; i++){
+			player = this.players[i];
 			console.log("player " + player.id);
 			console.log(player.hq.position);
 		}

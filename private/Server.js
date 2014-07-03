@@ -5,8 +5,8 @@ Server = function(){}
 
 Server.socket = "8001";
 
-Server.players = new Array();
-Server.games = new Array();
+Server.players = [];
+Server.games = [];
 
 Server.newConnection = function(sock){
 	console.log("new connection");
