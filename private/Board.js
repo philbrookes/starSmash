@@ -24,15 +24,19 @@ Board.prototype = {
 	startingPosition: function(index){
 		switch(index){
 			case '0':
+			case 0:
 				var pos = {"x": 50, "y": 50};
 				break;
 			case '1':
+			case 1:
 				var pos =  {"x": this.width - 50, "y": this.height - 50};
 				break;
 			case '2':
+			case 2:
 				var pos =  {"x": this.width - 50, "y": 50};
 				break;
 			case '3':
+			case 3:
 				var pos =  {"x": 50, "y": this.height - 50};
 				break;
 		}

@@ -62,6 +62,13 @@ Client.prototype = {
 		item.maxHp = data.maxHp;
 	},
 	starmap: function(data){
-
+		console.log(data);
+		var star;
+		for(var i=0;i<data.stars.length;i++){
+			star = new Item();
+			star.style = data.style;
+			star.position = data.stars[i].position;
+			this.game.addItem(star);
+		}
 	}
 }

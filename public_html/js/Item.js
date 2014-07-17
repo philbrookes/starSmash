@@ -9,6 +9,7 @@ Item = function(id){
 	this.maxHp = null;
 	this.tapped = null;
 	this.image = null;
+	this.imageReady = false;
 }
 
 Item.prototype = {

@@ -6,6 +6,9 @@ Game = function() {
 	this.board = new Board(640, 480, 250);
 	this.numPlayers = 2;
 	this.state = Game.PREPARING;
+	this.stateTicker = null;
+	this.processTicker = null;
+	this.lastTick = null;
 }
 
 Game.PREPARING = 1;
@@ -29,25 +32,51 @@ Game.prototype = {
 	},
 	startGame: function(){
 		this.state = Game.RUNNING;
-		for(var index in this.players){
+		this.sendToPlayers({
+			"command": "starmap", 
+			"data": {
+				"stars": this.board.generateStars(), 
+				"style" : config.star_style
+			}
+		});
+		for(var index = 0; index < this.players.length; index++){
 			var player = this.players[index];
-			player.hq = player.grantUnit(
-				"headquarters"
-				, this.board.startingPosition(index)
-			);
-			player.hq.position = this.board.startingPosition(index);
-			console.log("player " + player.id);
-			console.log(player.hq.position);
-			this.sendToPlayers({"command": "updateUnit", "data": player.hq});
+			player.hq = player.grantUnit("headquarters", this.board.startingPosition(index));
 		};
 
-		for(var index in this.players){
-			var player = this.players[index];
-			console.log("player " + player.id);
-			console.log(player.hq.position);
-		}
-	}
+		this.stateTick();
+		var me = this;
+		this.stateTicker = setInterval(function(){
+			me.stateTick();
+		}, 1000);
+		this.processTicker = setInterval(function(){
+			me.processTick();
+		}, 10);
 
+	},
+	stateTick: function(){
+		for(var index = 0; index < this.players.length; index++){
+			var player = this.players[index];
+			for(var i = 0; i < player.army.length; i++){
+				var unit = player.army[i];
+				this.sendToPlayers({"command": "updateUnit", "data": unit});
+			}
+		}
+	},
+	processTick: function(){
+		if(this.lastTick)
+		{
+			var timeElapsed = (new Date().getTime() - this.lastTick) / 1000;
+		}
+		for(var index = 0; index < this.players.length; index++){
+			var player = this.players[index];
+			for(var i = 0; i < player.army.length; i++){
+				var unit = player.army[i];
+				unit.process(timeElapsed);
+			}
+		}
+		this.lastTick = new Date().getTime();
+	}
 }
 
 module.exports = Game;

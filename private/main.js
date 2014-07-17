@@ -3,6 +3,11 @@ var Server = require('./Server.js');
 var ws   = require("nodejs-websocket");
 
 config = {
+	"star_style": {
+		"width": 3,
+		"height": 3,
+		"colour": "#F7F7F7"
+	},
 	"ship":{
 		"attacker":{
 			"cost": 15,

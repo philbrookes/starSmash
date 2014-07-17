@@ -1,3 +1,5 @@
+var Ship = require("./Ship.js");
+
 var plyrId = 1;
 Player = function(socket) {
 	this.id = plyrId++;
@@ -27,14 +29,28 @@ Player.prototype = {
 	},
 	grantUnit: function(unitType, pos){
 		if(typeof pos === "undefined"){
-			pos = this.hq.position;
+			pos = {};
+			pos.x = this.hq.position.x;
+			pos.y = this.hq.position.y;
 		}
-		var ship = config.ship[unitType];
+		var template = config.ship[unitType];
+		var ship = new Ship();
 		ship.id = this.generateId(unitType);
+		ship.maxHp = template.maxHp;
 		ship.currentHp = ship.maxHp;
-		ship.position = pos;	
 		
+		ship.speed = template.speed;
+		ship.position = pos;	
 		ship.destination = ship.position;
+
+		ship.weapons = template.weapons;
+
+		ship.style = template.style;
+
+		ship.gather_radius = template.gather_radius;
+
+		this.army.push(ship);
+
 		return ship;
 	},
 	build: function(unitType){
@@ -42,8 +58,6 @@ Player.prototype = {
 			this.send({"command": "build", "data": {"status": "fail"}});
 			return;
 		}
-		console.log(this.id + " building a " + unitType);
-		console.log(this.hq.position);
 
 		this.hq.resources -= config.ship[unitType].cost;
 		
