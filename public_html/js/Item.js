@@ -13,8 +13,8 @@ Item = function(id){
 }
 
 Item.prototype = {
-	render: function(context){
-		this.movement();
+	render: function(context, timeElapsed){
+		this.movement(timeElapsed);
 
 		context.translate(this.position.x, this.position.y);
 
@@ -39,13 +39,6 @@ Item.prototype = {
 				this.style.width,
 				this.style.height
 			);
-
-			context.strokeStyle = "#ffff99";
-	      	context.beginPath();
-	      	context.moveTo(0, 0);
-	      	context.lineTo(0, -10);
-	      	context.lineWidth = 1;
-	      	context.stroke();
       	}
 	},
 	drawHpBar: function(context){
@@ -80,17 +73,17 @@ Item.prototype = {
 		this.tapped = data.tapped;
 		this.speed = data.speed;
 	},
-	movement: function(){
+	movement: function(timeElapsed){
 		var tx = this.destination.x - this.position.x,
     	ty = this.destination.y - this.position.y,
     	dist = Math.sqrt(tx*tx+ty*ty),
     	rad = Math.atan2(ty,tx),
     	angle = rad/Math.PI * 180;
 
-    	var velX = (tx/dist) * (this.speed * Renderer.timeElapsed);
-    	var velY = (ty/dist) * (this.speed * Renderer.timeElapsed);
-
-    	if(dist > (this.speed * Renderer.timeElapsed)){
+    	if(dist > (this.speed * timeElapsed)){
+    		var velX = (tx/dist) * (this.speed * timeElapsed);
+    		var velY = (ty/dist) * (this.speed * timeElapsed);
+    		
     		this.position.x += velX;
 			this.position.y += velY;
     	} else {

@@ -8,22 +8,19 @@ Renderer = function(canvasId){
 	this.lastRender = null;
 }
 
-Renderer.timeElapsed = null;
-
 Renderer.prototype = {
 	setClearColor: function(color){
 		this.bgColor = color;
 	},
 	render: function(game){
-		if(this.lastRender)
-		{
-			Renderer.timeElapsed = (new Date().getTime() - this.lastRender) / 1000;
+		if(this.lastRender){
+			var timeElapsed = (new Date().getTime() - this.lastRender) / 1000;
 		}
 		this.clear(this.bgColor);
 		for(i in game.items){
 			this.context.save();
 			if(typeof(game.items[i].render == "function")){
-				game.items[i].render(this.context);
+				game.items[i].render(this.context, timeElapsed);
 			}
 			this.context.restore();
 		}

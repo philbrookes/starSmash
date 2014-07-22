@@ -1,5 +1,5 @@
 Client = function(game){
-	this.sock = new WebSocket("ws://starsmash.com.dev:8001");
+	this.sock = new WebSocket("ws://192.168.0.5:8001");
 	var me = this;
 	this.sock.onmessage = function(evt){
 		me.processCommand(evt);	
@@ -47,27 +47,39 @@ Client.prototype = {
 			var item = new Item(data.id);
 			this.game.addItem(item);
 		}
-		item.style = data.style;
-		if(item.style.image){
-			item.image = new Image();
-			item.image.src = item.style.image;
-			item.image.onload = function(){
-				item.imageReady = true;
+		if(typeof data.style === "object"){
+			item.style = data.style;
+			if(item.style.image){
+				item.image = new Image();
+				item.image.src = item.style.image;
+				item.image.onload = function(){
+					item.imageReady = true;
+				}
 			}
 		}
-		item.position = data.position;
-		item.destination = data.destination;
-		item.currentHp = data.currentHp;
-		item.speed = data.speed;
-		item.maxHp = data.maxHp;
+		if(typeof data.position === "object"){
+			item.position = data.position;
+		}
+		if(typeof data.destination === "object"){
+			item.destination = data.destination;
+		}
+		if(typeof data.currentHp === "number"){
+			item.currentHp = data.currentHp;
+		}
+		if(typeof data.speed === "number"){
+			item.speed = data.speed;
+		}
+		if(typeof data.maxHp === "number"){
+			item.maxHp = data.maxHp;
+		}
 	},
 	starmap: function(data){
-		console.log(data);
 		var star;
 		for(var i=0;i<data.stars.length;i++){
-			star = new Item();
+			star = new Item(data.stars[i].id);
 			star.style = data.style;
 			star.position = data.stars[i].position;
+			star.destination = star.position;
 			this.game.addItem(star);
 		}
 	}
