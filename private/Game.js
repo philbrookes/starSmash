@@ -3,7 +3,7 @@ var Board = require("./Board.js");
 Game = function() {
 	this.players = new Array();
 	this.spectators = new Array();
-	this.board = new Board(640, 480, 250);
+	this.board = new Board(640, 480, 250, this);
 	this.numPlayers = 2;
 	this.state = Game.PREPARING;
 	this.stateTicker = null;
@@ -25,10 +25,31 @@ Game.prototype = {
 			this.startGame();
 		}
 	},
+	removePlayer: function(player) {
+		var i = this.players.indexOf(player);
+		if(i > -1){
+			this.players.splice(i, 1);
+			Server.removePlayer(player);
+		}
+	},
 	sendToPlayers: function(data){
-		this.players.forEach(function(player){
-			player.send(data);
-		});
+		for(var i=0;i<this.players.length;i++){
+			var player = this.players[i];
+			try{
+				player.send(data);
+			} catch (ex) {
+				console.log("exception: ", ex);
+				this.removePlayer(player);
+				this.end("A player disconnected");
+				break;
+			}	
+		}
+	},
+	end: function(reason){
+		this.state = Game.FINISHED;
+		clearInterval(this.stateTicker);
+		clearInterval(this.processTicker);
+		this.sendToPlayers({"command": "end", "data": reason});
 	},
 	startGame: function(){
 		this.state = Game.RUNNING;
@@ -58,14 +79,15 @@ Game.prototype = {
 		for(var index = 0; index < this.players.length; index++){
 			var player = this.players[index];
 			for(var i = 0; i < player.army.length; i++){
-				var unit = player.army[i];
-				this.sendToPlayers({"command": "updateUnit", "data": unit});
+				this.sendUnitUpdate(player.army[i]);
 			}
 		}
 	},
+	sendUnitUpdate: function(unit){
+		this.sendToPlayers({"command": "updateUnit", "data": unit.forJson()});
+	},
 	processTick: function(){
-		if(this.lastTick)
-		{
+		if(this.lastTick){
 			var timeElapsed = (new Date().getTime() - this.lastTick) / 1000;
 		}
 		for(var index = 0; index < this.players.length; index++){

@@ -6,7 +6,12 @@ config = {
 	"star_style": {
 		"width": 3,
 		"height": 3,
-		"colour": "#F7F7F7"
+		"color": "#F7F7F7"
+	},
+	"tapped_star_style": {
+		"width": 3,
+		"height": 3,
+		"color": "#A7A7A7"
 	},
 	"ship":{
 		"attacker":{
@@ -65,7 +70,7 @@ config = {
 				"height": 30,
 				"image": "http://1.bp.blogspot.com/-MQE-zK1mVSE/UdSVGV3GP3I/AAAAAAAAAu8/EOsv__HnS-M/s1600/spacestation.png",
 			},
-			"gather_radius": 50
+			"gather_radius": 0
 		}
 	}
 };

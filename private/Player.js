@@ -34,7 +34,7 @@ Player.prototype = {
 			pos.y = this.hq.position.y;
 		}
 		var template = config.ship[unitType];
-		var ship = new Ship();
+		var ship = new Ship(this);
 		ship.id = this.generateId(unitType);
 		ship.maxHp = template.maxHp;
 		ship.currentHp = ship.maxHp;
@@ -50,6 +50,8 @@ Player.prototype = {
 		ship.gather_radius = template.gather_radius;
 
 		this.army.push(ship);
+
+		this.game.sendUnitUpdate(ship);
 
 		return ship;
 	},
@@ -67,7 +69,9 @@ Player.prototype = {
 			"x": 500 - Math.floor(Math.random() * 200) + 1, 
 			"y": 350 - Math.floor(Math.random() * 200) + 1, 
 		};
-		this.game.sendToPlayers({"command": "updateUnit", "data": ship});
+		
+		this.game.sendUnitUpdate(ship);
+
 		return ship;
 	}
 }

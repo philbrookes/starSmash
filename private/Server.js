@@ -22,6 +22,9 @@ Server.findGame = function(){
 		if(game.state === Game.PREPARING){
 			retGame = game;
 		}
+		if(game.state === Game.FINISHED){
+			Server.removeGame(game);
+		}
 	});
 	if(retGame){
 		return retGame;
@@ -42,4 +45,19 @@ Server.handleInput = function(player, data){
 			break;
 	}
 }
+
+Server.removeGame = function(game){
+	var i = Server.games.indexOf(game);
+		if(i > -1){
+			Server.games.splice(i, 1);
+		}
+}
+
+Server.removePlayer = function(player){
+	var i = Server.players.indexOf(player);
+		if(i > -1){
+			Server.players.splice(i, 1);
+		}
+}
+
 module.exports = Server;

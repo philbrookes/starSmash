@@ -1,25 +1,28 @@
 var Star = require("./Star.js");
 var Position = require("./Position.js");
 
-function Board(width, height, numStars){
+function Board(width, height, numStars, game){
 	this.width = width;
 	this.height = height;
 	this.numStars = numStars;
 	this.stars = new Array();
+	this.game = game;
 }
 
 Board.prototype = {
 	generateStars: function() {
+		var ret = new Array();
 		for(var i=0;i<this.numStars;i++){
 			var pos = new Position(
 				Math.floor(Math.random()*(this.width + 1)),
 				Math.floor(Math.random()*(this.height + 1))
 			);
-			var star = new Star(pos);
-			star.id = i;
+			var star = new Star(pos, this);
+			star.id = "star_" + i;
 			this.stars.push(star);
+			ret.push(star.forJson());
 		}
-		return this.stars;
+		return ret;
 	},
 	startingPosition: function(index){
 		switch(index){
