@@ -74,21 +74,21 @@ Item.prototype = {
 		this.speed = data.speed;
 	},
 	movement: function(timeElapsed){
-		var tx = this.destination.x - this.position.x,
-    	ty = this.destination.y - this.position.y,
-    	dist = Math.sqrt(tx*tx+ty*ty),
-    	rad = Math.atan2(ty,tx),
-    	angle = rad/Math.PI * 180;
+	    var tx = this.destination.x - this.position.x,
+            ty = this.destination.y - this.position.y,
+    	    dist = Math.sqrt(tx*tx+ty*ty),
+    	    rad = Math.atan2(ty,tx),
+    	    angle = rad/Math.PI * 180;
 
-    	if(dist > (this.speed * timeElapsed)){
+    	    if(dist > (this.speed * timeElapsed)){
     		var velX = (tx/dist) * (this.speed * timeElapsed);
     		var velY = (ty/dist) * (this.speed * timeElapsed);
     		
     		this.position.x += velX;
-			this.position.y += velY;
-    	} else {
+		this.position.y += velY;
+    	    } else {
     		this.position.x = this.destination.x;
     		this.position.y = this.destination.y;
-    	}
+    	    }
 	}
 }
