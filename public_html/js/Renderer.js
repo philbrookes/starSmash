@@ -16,6 +16,8 @@ Renderer.prototype = {
 		if(this.lastRender){
 			var timeElapsed = (new Date().getTime() - this.lastRender) / 1000;
 		}
+		this.lastRender = new Date().getTime();
+
 		this.clear(this.bgColor);
 		for(i in game.items){
 			this.context.save();
@@ -24,7 +26,6 @@ Renderer.prototype = {
 			}
 			this.context.restore();
 		}
-		this.lastRender = new Date().getTime();
 	},
 	clear: function(color) {
 		this.context.fillStyle = color;

@@ -16,6 +16,11 @@ Item.prototype = {
 	render: function(context, timeElapsed){
 		this.movement(timeElapsed);
 
+        context.save();
+        context.translate(this.destination.x, this.destination.y);
+        context.fillStyle = "#ffff88";
+        context.fillRect(-1, -1, 1, 1);
+        context.restore();
 		context.translate(this.position.x, this.position.y);
 
 		if(this.maxHp != null){
@@ -75,20 +80,18 @@ Item.prototype = {
 	},
 	movement: function(timeElapsed){
 	    var tx = this.destination.x - this.position.x,
-            ty = this.destination.y - this.position.y,
-    	    dist = Math.sqrt(tx*tx+ty*ty),
-    	    rad = Math.atan2(ty,tx),
-    	    angle = rad/Math.PI * 180;
-
-    	    if(dist > (this.speed * timeElapsed)){
+        ty = this.destination.y - this.position.y,
+	    dist = Math.sqrt(tx*tx+ty*ty);
+        
+	    if(dist > (this.speed * timeElapsed)){
     		var velX = (tx/dist) * (this.speed * timeElapsed);
     		var velY = (ty/dist) * (this.speed * timeElapsed);
     		
     		this.position.x += velX;
-		this.position.y += velY;
-    	    } else {
+		    this.position.y += velY;
+	    } else {
     		this.position.x = this.destination.x;
     		this.position.y = this.destination.y;
-    	    }
+	    }
 	}
 }

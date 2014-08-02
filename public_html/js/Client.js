@@ -1,5 +1,5 @@
 Client = function(game){
-	this.sock = new WebSocket("ws://192.168.0.5:8001");
+	this.sock = new WebSocket("ws://127.0.0.1:8001");
 	var me = this;
 	this.sock.onmessage = function(evt){
 		me.processCommand(evt);	

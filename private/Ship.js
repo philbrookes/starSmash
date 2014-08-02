@@ -67,39 +67,41 @@ Ship.prototype = {
 		}
 	},
 	shoot: function(timeElapsed){
-		if(this.gather_radius){
-			var tx = this.target.position.x - this.position.x;
-			var ty = this.target.position.y - this.position.y;
-			var dist = Math.sqrt(tx*tx+ty*ty);
-			if(this.carrying_energy == false && dist < this.gather_radius ){
-				this.target.tap();
-				this.carrying_energy = true;
-			}
-		}
+		
 	},
+    arrived: function(){
+        this.player.game.sendUnitUpdate(this);
+        if(this.carrying_energy){
+            this.carrying_energy = false;
+            this.player.hq.resources++;
+        } else {
+            this.carrying_energy = true;
+            this.target.tap();
+        }
+    },
 	movement: function(timeElapsed){
 	    //dont move if we're at the destination already
 	    if(this.position.x == this.destination.x && this.position.y == this.destination.y){
-		return;
+		  return;
 	    }
 
 	    var tx = this.destination.x - this.position.x,
-    	    ty = this.destination.y - this.position.y,
-    	    dist = Math.sqrt(tx*tx+ty*ty),
-    	    rad = Math.atan2(ty,tx),
-    	    angle = rad/Math.PI * 180;
+	    ty = this.destination.y - this.position.y,
+	    dist = Math.sqrt(tx*tx+ty*ty),
+	    rad = Math.atan2(ty,tx),
+	    angle = rad/Math.PI * 180;
 
-    	    if(dist > (this.speed * timeElapsed)){
+	    if(dist > (this.speed * timeElapsed)){
 	    	var velX = (tx/dist) * (this.speed * timeElapsed);
 	    	var velY = (ty/dist) * (this.speed * timeElapsed);
 
     		this.position.x += velX;
-		this.position.y += velY;
-    	    } else {
+		    this.position.y += velY;
+	    } else {
     		this.position.x = this.destination.x;
     		this.position.y = this.destination.y;
-    		this.player.game.sendUnitUpdate(this);
-    	    }
+            this.arrived();
+	    }
 	},
 	forJson: function(){
 		return {

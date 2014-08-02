@@ -15,6 +15,8 @@ Star.prototype = {
 	tap: function(){
 		this.tapped = true;
 		this.style = config.tapped_star_style;
+		var me = this;
+		setTimeout(function(){me.untap();}, this.rechargeTime * 1000);
 		this.board.game.sendUnitUpdate(this);
 	},
 	untap: function(){

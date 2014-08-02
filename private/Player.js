@@ -41,7 +41,8 @@ Player.prototype = {
 		
 		ship.speed = template.speed;
 		ship.position = pos;	
-		ship.destination = ship.position;
+		ship.destination.x = ship.position.x;
+		ship.destination.y = ship.position.y;
 
 		ship.weapons = template.weapons;
 
@@ -62,14 +63,7 @@ Player.prototype = {
 		}
 
 		this.hq.resources -= config.ship[unitType].cost;
-		
 		var ship = this.grantUnit(unitType);
-
-		ship.destination = {
-			"x": 500 - Math.floor(Math.random() * 200) + 1, 
-			"y": 350 - Math.floor(Math.random() * 200) + 1, 
-		};
-		
 		this.game.sendUnitUpdate(ship);
 
 		return ship;
