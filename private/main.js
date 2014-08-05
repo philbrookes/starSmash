@@ -18,6 +18,7 @@ config = {
 			"cost": 15,
 			"maxHp": 25,
 			"speed": 15,
+			"canMove": true,
 			"weapons": [
 				{ "damage": 3, "reload": 3000, "range": 50, "color": "#ffff66"}
 			],
@@ -32,6 +33,7 @@ config = {
 			"cost": 30,
 			"maxHp": 50,
 			"speed": 3,
+			"canMove": true,
 			"weapons": [
 				{ "damage": 8, "reload": 2500, "range": 75, "color": "#ffff66"}
 			],
@@ -46,6 +48,7 @@ config = {
 			"cost": 3,
 			"maxHp": 12,
 			"speed": 25,
+			"canMove": true,
 			"weapons": [
 				{ "damage": 0.025, "reload": 250, "range": 25, "color": "#ffffcc"}
 			],
@@ -59,7 +62,8 @@ config = {
 		"headquarters":{
 			"cost": 5000,
 			"maxHp": 1200,
-			"speed": 0.25,
+			"speed": 2.5,
+			"canMove": true,
 			"weapons": [
 				{ "damage": 5, "reload": 2500, "range": 100, "color": "#ffff66"},
 				{ "damage": .5, "reload": 250, "range": 50, "color": "#ff6666"},

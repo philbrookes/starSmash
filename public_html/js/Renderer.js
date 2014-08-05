@@ -26,6 +26,7 @@ Renderer.prototype = {
 			}
 			this.context.restore();
 		}
+		game.ui.render(this.context, timeElapsed);
 	},
 	clear: function(color) {
 		this.context.fillStyle = color;

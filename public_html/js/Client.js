@@ -23,11 +23,11 @@ Client.prototype = {
 		data.unitType = unitType;
 		this.sendCommand(data);
 	},
-	moveUnit: function(unitId, pos){
+	moveUnit: function(unitId, destination){
 		var data = {};
 		data.command = "move";
 		data.unitId = unitId;
-		data.position = pos;
+		data.destination = destination;
 		this.sendCommand(data);
 	},
 	processCommand: function(evt){
@@ -39,7 +39,13 @@ Client.prototype = {
 			case "starmap":
 				this.starmap(data.data);
 				break;
+			case "player_id":
+				this.setPlayerId(data);
+				break;
 		}
+	},
+	setPlayerId: function(data){
+		this.game.playerId = data.value;
 	},
 	updateUnit: function(data){
 		var item = this.game.getItem(data.id);
@@ -72,6 +78,12 @@ Client.prototype = {
 		if(typeof data.maxHp === "number"){
 			item.maxHp = data.maxHp;
 		}
+		if(typeof data.playerId === "number"){
+			item.playerId = data.playerId;
+		}
+		if(typeof data.canMove === "boolean"){
+			item.canMove = data.canMove;
+		}
 	},
 	starmap: function(data){
 		var star;
@@ -80,6 +92,7 @@ Client.prototype = {
 			star.style = data.style;
 			star.position = data.stars[i].position;
 			star.destination = star.position;
+			star.canMove = false;
 			this.game.addItem(star);
 		}
 	}

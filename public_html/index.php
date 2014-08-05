@@ -5,6 +5,7 @@
 		<script type="text/javascript" src="/js/Renderer.js"></script>
 		<script type="text/javascript" src="/js/Game.js"></script>
 		<script type="text/javascript" src="/js/Client.js"></script>
+		<script type="text/javascript" src="/js/Ui.js"></script>
 		<script type="text/javascript" src="/js/Item.js"></script>
 		<script type="text/javascript" src="/js/Position.js"></script>
 		<script type="text/javascript" src="/js/Style.js"></script>

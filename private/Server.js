@@ -43,6 +43,9 @@ Server.handleInput = function(player, data){
 		case "build":
 			player.build(data.unitType);
 			break;
+		case "move":
+			console.log(data);
+			player.issueMove(data.unitId, data.destination);
 	}
 }
 

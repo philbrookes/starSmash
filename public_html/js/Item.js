@@ -1,5 +1,7 @@
 Item = function(id){
 	this.id = id;
+	this.playerId;
+	this.canMove = false;
 	this.style = {};
 	this.position = {};
 	this.destination = {};
@@ -16,12 +18,17 @@ Item.prototype = {
 	render: function(context, timeElapsed){
 		this.movement(timeElapsed);
 
-        context.save();
-        context.translate(this.destination.x, this.destination.y);
-        context.fillStyle = "#ffff88";
-        context.fillRect(-1, -1, 1, 1);
-        context.restore();
 		context.translate(this.position.x, this.position.y);
+
+		if(this.selected === true){
+			context.strokeStyle = "#ffffff";
+			context.strokeRect(
+				-((this.style.width+2) / 2), 
+				-((this.style.height+2) / 2),
+				this.style.width+2,
+				this.style.height+2
+			);
+		}
 
 		if(this.maxHp != null){
 			this.drawHpBar(context);
@@ -77,6 +84,8 @@ Item.prototype = {
 		this.maxHp = data.maxHp;
 		this.tapped = data.tapped;
 		this.speed = data.speed;
+		this.canMove = data.canMove;
+		this.playerId = data.playerId;
 	},
 	movement: function(timeElapsed){
 	    var tx = this.destination.x - this.position.x,

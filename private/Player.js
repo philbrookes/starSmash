@@ -27,6 +27,17 @@ Player.prototype = {
 	generateId: function(unitType){
 		return this.id + "_" + unitType.substr(0, 3) + "_" + this.shipIdTracker++;
 	},
+	issueMove: function(itemId, destination){
+		for(var i in this.army){
+			var ship = this.army[i];
+			if(ship.id === itemId){
+				ship.destination.x = destination.x;
+				ship.destination.y = destination.y;
+				this.game.sendUnitUpdate(ship);
+				return;
+			}
+		}
+	},
 	grantUnit: function(unitType, pos){
 		if(typeof pos === "undefined"){
 			pos = {};
@@ -43,6 +54,8 @@ Player.prototype = {
 		ship.position = pos;	
 		ship.destination.x = ship.position.x;
 		ship.destination.y = ship.position.y;
+
+		ship.canMove = template.canMove;
 
 		ship.weapons = template.weapons;
 

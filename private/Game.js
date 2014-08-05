@@ -21,6 +21,7 @@ Game.prototype = {
 		this.players.push(player);
 		player.game = this;
 
+		player.send({"command": "player_id", "value": player.id});
 		if(this.players.length == this.numPlayers){
 			this.startGame();
 		}
@@ -65,23 +66,11 @@ Game.prototype = {
 			player.hq = player.grantUnit("headquarters", this.board.startingPosition(index));
 		};
 
-		this.stateTick();
 		var me = this;
-		this.stateTicker = setInterval(function(){
-			me.stateTick();
-		}, 1000);
 		this.processTicker = setInterval(function(){
 			me.processTick();
 		}, 10);
 
-	},
-	stateTick: function(){
-		for(var index = 0; index < this.players.length; index++){
-			var player = this.players[index];
-			for(var i = 0; i < player.army.length; i++){
-				this.sendUnitUpdate(player.army[i]);
-			}
-		}
 	},
 	sendUnitUpdate: function(unit){
 		this.sendToPlayers({"command": "updateUnit", "data": unit.forJson()});

@@ -15,6 +15,7 @@ Ship = function(player) {
 	this.gather_radius = null;
 	this.carrying_energy = false;
 	this.target = {};
+	this.canMove = false;
 }
 
 Ship.prototype = {
@@ -40,7 +41,6 @@ Ship.prototype = {
 		if(this.gather_radius && this.carrying_energy){
 			this.setDestination(this.player.hq.position);
 		} else if(this.gather_radius) {
-
 			if(this.target.tapped === false){
 				return;
 			}
@@ -64,6 +64,8 @@ Ship.prototype = {
     			}
 			}
 			this.setTarget(closestStar);
+		} else {
+
 		}
 	},
 	shoot: function(timeElapsed){
@@ -71,10 +73,11 @@ Ship.prototype = {
 	},
     arrived: function(){
         this.player.game.sendUnitUpdate(this);
-        if(this.carrying_energy){
+
+        if(this.gather_radius && this.carrying_energy){
             this.carrying_energy = false;
             this.player.hq.resources++;
-        } else {
+        } else if(this.gather_radius && ! this.carrying_energy){
             this.carrying_energy = true;
             this.target.tap();
         }
@@ -113,7 +116,9 @@ Ship.prototype = {
 			"destination": this.destination,
 			"weapons": this.weapons,
 			"style": this.style,
-			"gather_radius": this.gather_radius
+			"gather_radius": this.gather_radius,
+			"canMove": this.canMove,
+			"playerId": this.player.id
 		};
 	}
 }
