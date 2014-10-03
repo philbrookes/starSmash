@@ -37,14 +37,14 @@ Server.findGame = function(){
 Server.handleInput = function(player, data){
 	data = JSON.parse(data);
 	switch(data.command){
-		case "setResources":
-			player.getHq().resources = data.resources;
+/*		case "setResources":
+			player.hq.resources = data.resources;
 			break;
+*/
 		case "build":
 			player.build(data.unitType);
 			break;
 		case "move":
-			console.log(data);
 			player.issueMove(data.unitId, data.destination);
 	}
 }

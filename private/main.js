@@ -11,21 +11,22 @@ config = {
 	"tapped_star_style": {
 		"width": 3,
 		"height": 3,
-		"color": "#A7A7A7"
+		"color": "#000000"
 	},
 	"ship":{
 		"attacker":{
 			"cost": 15,
 			"maxHp": 25,
-			"speed": 15,
+			"speed": 30,
 			"canMove": true,
 			"weapons": [
-				{ "damage": 3, "reload": 3000, "range": 50, "color": "#ffff66"}
+				{ "damage": 3, "reload": 3.000, "range": 150, "color": "#ffff55", "loaded": true, "loadingTimer": 0},
+				{ "damage": .2, "reload": .500, "range": 200, "color": "#666666", "loaded": true, "loadingTimer": 0}
 			],
 			"style": {
 				"width": 10,
 				"height": 10,
-				"image": "http://1.bp.blogspot.com/-ZFVNAKdhZEo/Uhue-jFl7nI/AAAAAAAAA3A/iflN3Xh31xY/s1600/RD2.png",
+				"image": "/images/Attacker.png",
 			},
 			"gather_radius": 0
 		},
@@ -35,7 +36,7 @@ config = {
 			"speed": 3,
 			"canMove": true,
 			"weapons": [
-				{ "damage": 8, "reload": 2500, "range": 75, "color": "#ffff66"}
+				{ "damage": 8, "reload": 2.500, "range": 225, "color": "#ffff66", "loaded": true, "loadingTimer": 0}
 			],
 			"style": {
 				"width": 15,
@@ -50,12 +51,12 @@ config = {
 			"speed": 25,
 			"canMove": true,
 			"weapons": [
-				{ "damage": 0.025, "reload": 250, "range": 25, "color": "#ffffcc"}
+				{ "damage": 0.025, "reload": .250, "range": 25, "color": "#ffffcc", "loaded": true, "loadingTimer": 0}
 			],
 			"style": {
 				"width": 8,
 				"height": 8,
-				"image": "http://2.bp.blogspot.com/-VrYc5MzBI8Y/Udb8ojt7tbI/AAAAAAAAAvk/oXGrdE-c5Hk/s1600/greenship4.png",
+				"image": "/images/Gatherer.png",
 			},
 			"gather_radius": 1
 		},
@@ -65,14 +66,14 @@ config = {
 			"speed": 2.5,
 			"canMove": true,
 			"weapons": [
-				{ "damage": 5, "reload": 2500, "range": 100, "color": "#ffff66"},
-				{ "damage": .5, "reload": 250, "range": 50, "color": "#ff6666"},
-				{ "damage": .25, "reload": 125, "range": 35, "color": "#ffffff"},
+				{ "damage": 5, "reload": 2.5, "range": 200, "color": "#ffff66", "loaded": true, "loadingTimer": 0},
+				{ "damage": .5, "reload": .250, "range": 100, "color": "#ff6666", "loaded": true, "loadingTimer": 0},
+				{ "damage": .25, "reload": .125, "range": 70, "color": "#ffffff", "loaded": true, "loadingTimer": 0},
 			],
 			"style": {
 				"width": 30,
 				"height": 30,
-				"image": "http://1.bp.blogspot.com/-MQE-zK1mVSE/UdSVGV3GP3I/AAAAAAAAAu8/EOsv__HnS-M/s1600/spacestation.png",
+				"image": "/images/headquarters.png",
 			},
 			"gather_radius": 0
 		}

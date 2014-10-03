@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodejs-websocket": "*"
+    "nodejs-websocket": "*",
+    "underscore": "^1.7.0"
   }
 }

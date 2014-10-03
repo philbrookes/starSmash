@@ -24,6 +24,8 @@ Game.prototype = {
 		player.send({"command": "player_id", "value": player.id});
 		if(this.players.length == this.numPlayers){
 			this.startGame();
+		} else {
+			player.send({"command": "waiting_for_opponent"});
 		}
 	},
 	removePlayer: function(player) {
@@ -42,6 +44,8 @@ Game.prototype = {
 				console.log("exception: ", ex);
 				this.removePlayer(player);
 				this.end("A player disconnected");
+				this.sendToPlayers({"command": "disconnect"});
+				this.state = Game.FINISHED;
 				break;
 			}	
 		}
@@ -64,7 +68,9 @@ Game.prototype = {
 		for(var index = 0; index < this.players.length; index++){
 			var player = this.players[index];
 			player.hq = player.grantUnit("headquarters", this.board.startingPosition(index));
+			player.grantUnit("gatherer");
 		};
+
 
 		var me = this;
 		this.processTicker = setInterval(function(){
@@ -74,6 +80,12 @@ Game.prototype = {
 	},
 	sendUnitUpdate: function(unit){
 		this.sendToPlayers({"command": "updateUnit", "data": unit.forJson()});
+	},
+	removeUnit: function(unit){
+		if(typeof unit.player !== "undefined"){
+			unit.player.delUnit(unit);
+		}
+		this.sendToPlayers({"command": "removeUnit", "data": unit.forJson()});
 	},
 	processTick: function(){
 		if(this.lastTick){
@@ -85,6 +97,11 @@ Game.prototype = {
 				var unit = player.army[i];
 				unit.process(timeElapsed);
 			}
+		}
+		for(var index = 0; index < this.board.missiles.length; index++){
+			var missile = this.board.missiles[index];
+			missile.process(timeElapsed);
+
 		}
 		this.lastTick = new Date().getTime();
 	}

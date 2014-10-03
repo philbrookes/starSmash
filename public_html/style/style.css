@@ -60,3 +60,81 @@
 #modal span.modal-button:hover {
 	background-color: #ddd;
 }
+
+#menu {
+	display: inline;
+	background-color: #dfdfdf;
+	border: 1px solid #676767;
+	width: 400px;
+	height: 25px;
+	position: relative;
+	float: right;
+	top: 500px;
+	left: -10px;
+}
+
+#resources {
+	display: inline;
+	position: absolute;
+	width: 100px;
+	height: 25px;
+	color: black;
+	font-family: arial;
+	font-weight: bold;
+	padding: 5px;
+	float: left;
+}
+.hint {
+	display: inline;
+	position: absolute;
+	width: 100px;
+	height: 25px;
+	color: black;
+	font-family: arial;
+	font-weight: bold;
+	padding: 5px;
+	float: left;
+	left: 80px;
+}
+
+#gatherer, #attacker {
+	display: inline;
+	position: relative;
+	width: 60px;
+	height: 20px;
+
+	background-color: #cdcdcd;
+	border: 1px solid #565656;
+	color: black;
+	font-family: arial;
+	font-weight: bold;
+	padding: 10px;
+}
+#gatherer{
+	left: 135px;
+	top: 5px;
+}
+
+#attacker{
+	left: 140px;
+	top: 5px;
+}
+
+#gatherer.available, #attacker.available{
+	background-color: #ffff55;
+	border: 1px solid #555500;
+	cursor: pointer;
+}
+
+
+#waiting{
+	position: relative;
+	display: block;
+	width: 229px;
+	height: 31px;
+	border: 5px solid #787878;
+	padding: 10px 0 0 10px;
+	background-color: #fff;
+	top: -250px;
+	left: 200px;
+}

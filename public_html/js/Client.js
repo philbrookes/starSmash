@@ -1,5 +1,5 @@
 Client = function(game){
-	this.sock = new WebSocket("ws://127.0.0.1:8001");
+	this.sock = new WebSocket("ws://www.starsmash.com.dev:8001");
 	var me = this;
 	this.sock.onmessage = function(evt){
 		me.processCommand(evt);	
@@ -13,8 +13,9 @@ Client.prototype = {
 	},
 	setResources: function(resources){
 		var data = {};
-		data.command = "setResouces";
+		data.command = "setResources";
 		data.resources = resources;
+		console.log("sending:", data);
 		this.sendCommand(data);
 	},
 	buildUnit: function(unitType){
@@ -36,16 +37,38 @@ Client.prototype = {
 			case "updateUnit":
 				this.updateUnit(data.data);
 				break;
+			case "removeUnit":
+				this.removeUnit(data.data);
+				break;
 			case "starmap":
+				$("#waiting").hide();
 				this.starmap(data.data);
 				break;
 			case "player_id":
 				this.setPlayerId(data);
 				break;
+			case "resourceUpdate":
+				this.updateResources(data.data);
+				break;
+			case "disconnect":
+				this.sock.close();
+				$("#waiting").html("disconnected, please refresh");
+				$("#waiting").show();
+				break;
+			case "waiting_for_opponent":
+				$("#waiting").html("waiting for an opponent");
+				$("#waiting").show();
 		}
 	},
 	setPlayerId: function(data){
 		this.game.playerId = data.value;
+	},
+	removeUnit: function(data){
+		var item = this.game.getItem(data.id);
+		if(! item){
+			return;
+		}
+		this.game.delItem(item);
 	},
 	updateUnit: function(data){
 		var item = this.game.getItem(data.id);
@@ -94,6 +117,19 @@ Client.prototype = {
 			star.destination = star.position;
 			star.canMove = false;
 			this.game.addItem(star);
+		}
+	},
+	updateResources: function(data){
+		$("#resources").html("ore: " + data.amount);
+		if(data.amount >= 3){
+			$("#gatherer").addClass("available");
+		} else {
+			$("#gatherer").removeClass("available");
+		}
+		if(data.amount >= 15){
+			$("#attacker").addClass("available");
+		} else {
+			$("#attacker").removeClass("available");
 		}
 	}
 }

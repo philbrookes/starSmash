@@ -1,4 +1,4 @@
-var Ship = require("./Ship.js");
+var ShipFactory = require("./Ship/Factory.js")();
 
 var plyrId = 1;
 Player = function(socket) {
@@ -22,7 +22,14 @@ Player = function(socket) {
 
 Player.prototype = {
 	send: function(data) {
-		this.sock.sendText(JSON.stringify(data));
+		try{
+			this.sock.sendText(JSON.stringify(data));
+		} catch (ex) {
+			this.game.removePlayer(this);
+			this.game.end("A player disconnected");
+			this.game.sendToPlayers({"command": "disconnect"});
+			this.state = Game.FINISHED;
+		}
 	},
 	generateId: function(unitType){
 		return this.id + "_" + unitType.substr(0, 3) + "_" + this.shipIdTracker++;
@@ -38,33 +45,28 @@ Player.prototype = {
 			}
 		}
 	},
-	grantUnit: function(unitType, pos){
-		if(typeof pos === "undefined"){
-			pos = {};
-			pos.x = this.hq.position.x;
-			pos.y = this.hq.position.y;
+	delUnit: function(unit){
+		var i = this.army.indexOf(unit);
+		if(i > -1){
+			this.army.splice(i, 1);
 		}
-		var template = config.ship[unitType];
-		var ship = new Ship(this);
-		ship.id = this.generateId(unitType);
-		ship.maxHp = template.maxHp;
-		ship.currentHp = ship.maxHp;
-		
-		ship.speed = template.speed;
-		ship.position = pos;	
-		ship.destination.x = ship.position.x;
-		ship.destination.y = ship.position.y;
-
-		ship.canMove = template.canMove;
-
-		ship.weapons = template.weapons;
-
-		ship.style = template.style;
-
-		ship.gather_radius = template.gather_radius;
-
-		this.army.push(ship);
-
+	},
+	grantUnit: function(unitType, pos){
+		var ship = {};
+		switch(unitType){
+			case "headquarters":
+				ship = ShipFactory.buildHeadquarters(this, pos);
+				break;
+			case "gatherer":
+				ship = ShipFactory.buildGatherer(this);
+				break;
+			case "attacker":
+				ship = ShipFactory.buildAttacker(this);
+				break;
+			case "defender":
+				ship = ShipFactory.buildDefender(this);
+				break;
+		}
 		this.game.sendUnitUpdate(ship);
 
 		return ship;
@@ -75,11 +77,13 @@ Player.prototype = {
 			return;
 		}
 
-		this.hq.resources -= config.ship[unitType].cost;
+		this.incrementResources(- config.ship[unitType].cost);
 		var ship = this.grantUnit(unitType);
-		this.game.sendUnitUpdate(ship);
-
 		return ship;
+	},
+	incrementResources: function(amount){
+		this.hq.resources += amount;
+		this.send({"command": "resourceUpdate", "data": {"amount": this.hq.resources}});
 	}
 }
 

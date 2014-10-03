@@ -1,12 +1,14 @@
 var Star = require("./Star.js");
 var Position = require("./Position.js");
+var Missile = require("./Missile.js");
 
 function Board(width, height, numStars, game){
 	this.width = width;
 	this.height = height;
 	this.numStars = numStars;
-	this.stars = new Array();
+	this.stars = [];
 	this.game = game;
+	this.missiles = [];
 }
 
 Board.prototype = {
@@ -44,6 +46,17 @@ Board.prototype = {
 				break;
 		}
 		return pos;
+	},
+	addMissile: function(pos, damage, colour, target){
+		var msl = new Missile(this, pos, damage, colour, target);
+		this.missiles.push(msl);
+	},
+	delMissile: function(msl){
+		this.game.removeUnit(msl);
+		var i = this.missiles.indexOf(msl);
+		if(i > -1){
+			this.missiles.splice(i, 1);
+		}
 	}
 }
 

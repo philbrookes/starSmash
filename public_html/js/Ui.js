@@ -2,15 +2,15 @@ Ui = function(canvasId){
 	var me = this;
 	this.game = {};
 	$("#" + canvasId).mousedown(function(evt){
-		me.mousedown(evt);
+		//me.mousedown(evt);
 	});
 
 	$("#" + canvasId).mouseup(function(evt){
-		me.mouseup(evt);
+		//me.mouseup(evt);
 	});
 
 	$("#" + canvasId).mousemove(function(evt){
-		me.mousemove(evt);
+		//me.mousemove(evt);
 	});
 	this.clicked = false;
 	this.clickTime = null;
