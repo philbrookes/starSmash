@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "digital_ocean"
+  config.ssh.private_key_path = "~/.ssh/id_rsa"
+  config.vm.provider :digital_ocean do |provider|
+    provider.token = "04e564e34ba1b3f9493408c048781cebbadf45e1385df36392b8fdc5ebf162f1"
+    provider.image = "14.04 x64"
+    provider.region = "lon1"
+  end
+  config.vm.provision "shell", path: "deploy.sh"
+end
