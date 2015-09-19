@@ -2,7 +2,7 @@ var _ = require("underscore");
 
 var Combat = function(){
 	
-}
+};
 
 Combat.prototype = {
 	process: function(timeElapsed){
@@ -60,6 +60,6 @@ Combat.prototype = {
 			}
 		});
 	}
-}
+};
 
 module.exports = Combat;

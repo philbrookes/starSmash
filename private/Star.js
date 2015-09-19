@@ -1,12 +1,12 @@
 Star = function (position, board) {
-	this.id;
+	this.id = 0;
 	this.position = position;
 	this.tapped = false;
 	this.energy = 1;
 	this.rechargeTime = 60;
 	this.board = board;
 	this.style = config.star_style;
-}
+};
 
 Star.prototype = {
 	setEnergy: function(energy){
@@ -31,8 +31,8 @@ Star.prototype = {
 			"energy": this.energy,
 			"id": this.id,
 			"style": this.style
-		}
+		};
 	}
-}
+};
 
 module.exports = Star;

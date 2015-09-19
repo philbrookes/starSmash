@@ -50,8 +50,8 @@ module.exports = function(){
 			player.army.push(ship);
 			return ship;
 		}
-	}	
-}
+	};
+};
 
 function buildGenericShip(template, player, pos){
 	var ship = new Ship(player);
@@ -71,7 +71,7 @@ function buildGenericShip(template, player, pos){
 		shipWeapon.loaded = weapon.loaded;
 		shipWeapon.loadingTimer = weapon.loadingTimer;
 		ship.weapons.push(shipWeapon);
-	})
+	});
 	ship.style = template.style;
 	ship.gather_radius = template.gather_radius;
 
@@ -82,22 +82,22 @@ function buildGenericShip(template, player, pos){
 }
 
 function attackerMethods(ship){
-	ship.getType = function(){ return "attacker"; }
+	ship.getType = function(){ return "attacker"; };
 	_.extend(ship, Mover.prototype);
 	_.extend(ship, Combat.prototype);
 }
 
 function defenderMethods(ship){
-	ship.getType = function(){ return "defender"; }
+	ship.getType = function(){ return "defender"; };
 }
 
 function gathererMethods(ship){
-	ship.getType = function(){ return "gatherer"; }
+	ship.getType = function(){ return "gatherer"; };
 	_.extend(ship, Mover.prototype);
 	_.extend(ship, Gatherer.prototype);
 }
 
 function headquartersMethods(ship){
-	ship.getType = function(){ return "headquarters"; }
+	ship.getType = function(){ return "headquarters"; };
 	_.extend(ship, Mover.prototype);
 }

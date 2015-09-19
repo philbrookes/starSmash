@@ -8,7 +8,7 @@ Player = function(socket) {
 	this.sock = socket;
 	
 	this.game = null;
-	this.army = new Array();
+	this.army = [];
 	this.hq = {};
 	this.resources = 0;
 
@@ -18,7 +18,7 @@ Player = function(socket) {
 	this.sock.on("text", function(evt){
 		Server.handleInput(me, evt);
 	});
-}
+};
 
 Player.prototype = {
 	send: function(data) {
@@ -85,6 +85,6 @@ Player.prototype = {
 		this.hq.resources += amount;
 		this.send({"command": "resourceUpdate", "data": {"amount": this.hq.resources}});
 	}
-}
+};
 
 module.exports = Player;

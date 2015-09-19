@@ -13,10 +13,8 @@ var Missile = function(board, pos, damage, color, target){
 		"width": 1,
 		"height": 1,
 		"color": color
-	}
+	};
 };
-
-Missile.prototype 
 
 Missile.prototype = {
 	process: function(timeElapsed){
@@ -28,7 +26,7 @@ Missile.prototype = {
 	},
 	movement: function(timeElapsed){
 		//dont move if we're at the destination already
-	    if(this.position.x == this.destination.x && this.position.y == this.destination.y){
+	    if(this.position.x === this.destination.x && this.position.y === this.destination.y){
 		  this.arrived();
 	    }
 

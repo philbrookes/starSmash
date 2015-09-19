@@ -13,7 +13,7 @@ function Board(width, height, numStars, game){
 
 Board.prototype = {
 	generateStars: function() {
-		var ret = new Array();
+		var ret = [];
 		for(var i=0;i<this.numStars;i++){
 			var pos = new Position(
 				Math.floor(Math.random()*(this.width + 1)),
@@ -27,22 +27,23 @@ Board.prototype = {
 		return ret;
 	},
 	startingPosition: function(index){
-		switch(index){
+		var pos = {"x": 0, "y": 0};
+    switch(index){
 			case '0':
 			case 0:
-				var pos = {"x": 50, "y": 50};
+				pos = {"x": 50, "y": 50};
 				break;
 			case '1':
 			case 1:
-				var pos =  {"x": this.width - 50, "y": this.height - 50};
+				pos =  {"x": this.width - 50, "y": this.height - 50};
 				break;
 			case '2':
 			case 2:
-				var pos =  {"x": this.width - 50, "y": 50};
+				pos =  {"x": this.width - 50, "y": 50};
 				break;
 			case '3':
 			case 3:
-				var pos =  {"x": 50, "y": this.height - 50};
+				pos =  {"x": 50, "y": this.height - 50};
 				break;
 		}
 		return pos;
@@ -58,6 +59,6 @@ Board.prototype = {
 			this.missiles.splice(i, 1);
 		}
 	}
-}
+};
 
 module.exports = Board;

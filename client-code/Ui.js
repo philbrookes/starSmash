@@ -16,7 +16,7 @@ Ui = function(canvasId){
 	this.clickTime = null;
 	this.startPos = {x: 0, y: 0};
 	this.curPos = {x: 0, y: 0};
-}
+};
 
 Ui.prototype = {
 	mousedown: function(event){
@@ -56,4 +56,4 @@ Ui.prototype = {
 		context.fillRect(this.startPos.x, this.startPos.y, this.curPos.x - this.startPos.x, this.curPos.y - this.startPos.y);
 		context.strokeRect(this.startPos.x, this.startPos.y, this.curPos.x - this.startPos.x, this.curPos.y - this.startPos.y);
 	}
-}
+};

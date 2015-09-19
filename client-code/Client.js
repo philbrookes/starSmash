@@ -1,11 +1,16 @@
 Client = function(game){
-	this.sock = new WebSocket("ws://www.starsmash.com.dev:8001");
-	var me = this;
-	this.sock.onmessage = function(evt){
+  var me = this;
+	this.sock = new WebSocket("ws://" + window.location.hostname + ":8001");
+
+  $(window).on('beforeunload', function(){
+    me.sock.close();
+  });
+
+  this.sock.onmessage = function(evt){
 		me.processCommand(evt);	
-	}
+	};
 	this.game = game;
-}
+};
 
 Client.prototype = {
 	sendCommand: function(data){
@@ -73,7 +78,7 @@ Client.prototype = {
 	updateUnit: function(data){
 		var item = this.game.getItem(data.id);
 		if(! item){
-			var item = new Item(data.id);
+      item = new Item(data.id);
 			this.game.addItem(item);
 		}
 		if(typeof data.style === "object"){
@@ -83,7 +88,7 @@ Client.prototype = {
 				item.image.src = item.style.image;
 				item.image.onload = function(){
 					item.imageReady = true;
-				}
+				};
 			}
 		}
 		if(typeof data.position === "object"){
@@ -132,4 +137,4 @@ Client.prototype = {
 			$("#attacker").removeClass("available");
 		}
 	}
-}
+};

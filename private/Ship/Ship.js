@@ -20,7 +20,7 @@ Ship = function(player) {
 	this.canMove = false;
 
 	this.resources = 0;
-}
+};
 
 Ship.prototype = {
 	forJson: function(){
@@ -49,8 +49,7 @@ Ship.prototype = {
 	},
 	destroy: function(){
 		this.player.game.removeUnit(this);
-		console.log("boom!");
 	}
-}
+};
 
 module.exports = Ship;

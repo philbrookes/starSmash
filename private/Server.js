@@ -1,12 +1,12 @@
 var Player = require("./Player.js");
 var Game = require("./Game.js");
 
-Server = function(){}
+Server = function(){};
 
 Server.socket = "8001";
 
-Server.players = new Array();
-Server.games = new Array();
+Server.players = [];
+Server.games = [];
 
 Server.newConnection = function(sock){
 	console.log("new connection");
@@ -14,7 +14,7 @@ Server.newConnection = function(sock){
 	Server.players.push(player);
 	var game = Server.findGame();
 	game.addPlayer(player);
-}
+};
 
 Server.findGame = function(){
 	var retGame = false;
@@ -32,7 +32,7 @@ Server.findGame = function(){
 	var game = new Game();
 	Server.games.push(game);
 	return game;
-}
+};
 
 Server.handleInput = function(player, data){
 	data = JSON.parse(data);
@@ -47,20 +47,20 @@ Server.handleInput = function(player, data){
 		case "move":
 			player.issueMove(data.unitId, data.destination);
 	}
-}
+};
 
 Server.removeGame = function(game){
 	var i = Server.games.indexOf(game);
 		if(i > -1){
 			Server.games.splice(i, 1);
 		}
-}
+};
 
 Server.removePlayer = function(player){
 	var i = Server.players.indexOf(player);
 		if(i > -1){
 			Server.players.splice(i, 1);
 		}
-}
+};
 
 module.exports = Server;

@@ -1,15 +1,15 @@
 var Board = require("./Board.js");
 
 Game = function() {
-	this.players = new Array();
-	this.spectators = new Array();
+	this.players = [];
+	this.spectators = [];
 	this.board = new Board(640, 480, 250, this);
 	this.numPlayers = 2;
 	this.state = Game.PREPARING;
 	this.stateTicker = null;
 	this.processTicker = null;
 	this.lastTick = null;
-}
+};
 
 Game.PREPARING = 1;
 Game.READY     = 2;
@@ -22,7 +22,7 @@ Game.prototype = {
 		player.game = this;
 
 		player.send({"command": "player_id", "value": player.id});
-		if(this.players.length == this.numPlayers){
+		if(this.players.length === this.numPlayers){
 			this.startGame();
 		} else {
 			player.send({"command": "waiting_for_opponent"});
@@ -69,7 +69,7 @@ Game.prototype = {
 			var player = this.players[index];
 			player.hq = player.grantUnit("headquarters", this.board.startingPosition(index));
 			player.grantUnit("gatherer");
-		};
+		}
 
 
 		var me = this;
@@ -88,23 +88,24 @@ Game.prototype = {
 		this.sendToPlayers({"command": "removeUnit", "data": unit.forJson()});
 	},
 	processTick: function(){
+    var timeElapsed= 0, index = 0;
 		if(this.lastTick){
-			var timeElapsed = (new Date().getTime() - this.lastTick) / 1000;
+			timeElapsed = (new Date().getTime() - this.lastTick) / 1000;
 		}
-		for(var index = 0; index < this.players.length; index++){
+		for(index = 0; index < this.players.length; index++){
 			var player = this.players[index];
 			for(var i = 0; i < player.army.length; i++){
 				var unit = player.army[i];
 				unit.process(timeElapsed);
 			}
 		}
-		for(var index = 0; index < this.board.missiles.length; index++){
+		for(index = 0; index < this.board.missiles.length; index++){
 			var missile = this.board.missiles[index];
 			missile.process(timeElapsed);
 
 		}
 		this.lastTick = new Date().getTime();
 	}
-}
+};
 
 module.exports = Game;

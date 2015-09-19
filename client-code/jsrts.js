@@ -9,6 +9,6 @@ $(document).ready(function(){
 	renderTick();
 });
 function renderTick(){
-	renderer.render(game)
+	renderer.render(game);
 	requestAnimationFrame(renderTick);
 }

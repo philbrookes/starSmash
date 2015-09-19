@@ -6,22 +6,23 @@ Renderer = function(canvasId){
 	this.context = this.canvas.getContext("2d");
 	this.bgColor = "#aaaacc";
 	this.lastRender = null;
-}
+};
 
 Renderer.prototype = {
 	setClearColor: function(color){
 		this.bgColor = color;
 	},
 	render: function(game){
+    var timeElapsed = 0;
 		if(this.lastRender){
-			var timeElapsed = (new Date().getTime() - this.lastRender) / 1000;
+			timeElapsed = (new Date().getTime() - this.lastRender) / 1000;
 		}
 		this.lastRender = new Date().getTime();
 
 		this.clear(this.bgColor);
-		for(i in game.items){
+		for (var i in game.items){
 			this.context.save();
-			if(typeof(game.items[i].render == "function")){
+			if(typeof(game.items[i].render === "function")){
 				game.items[i].render(this.context, timeElapsed);
 			}
 			this.context.restore();
@@ -32,4 +33,4 @@ Renderer.prototype = {
 		this.context.fillStyle = color;
 		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 	}
-}
+};

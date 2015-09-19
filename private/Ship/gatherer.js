@@ -44,7 +44,7 @@ gatherer.prototype = {
             this.carrying_energy = true;
             this.target.tap();
         }
-    },
-}
+    }
+};
 
 module.exports = gatherer;

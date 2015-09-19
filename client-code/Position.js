@@ -1,7 +1,7 @@
 Position = function(x, y){
 	this.x = x;
 	this.y = y;
-}
+};
 
 Position.prototype = {
 	setX: function(x){
@@ -10,4 +10,4 @@ Position.prototype = {
 	setY: function(y){
 		this.y = y;
 	}
-}
+};

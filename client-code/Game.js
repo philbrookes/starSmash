@@ -1,10 +1,10 @@
 Game = function(ui){
 	this.ui = ui;
 	this.ui.game = this;
-	this.items = new Array();
+	this.items = [];
 	this.selectedItems = [];
 	this.playerId = null;
-}
+};
 
 Game.prototype = {
 	addItem: function(item) {
@@ -12,16 +12,16 @@ Game.prototype = {
 	},
 	delItem: function(item) {
 		var index = this.items.indexOf(item);
-		if(index != -1){
+		if(index !== -1){
 			this.items.splice(index, 1);
 		}
 	},
 	clearItems: function() {
-		this.items = new Array();
+		this.items = [];
 	},
 	getItem: function(id) {
-		for(i in this.items){
-			if(this.items[i].id == id){
+		for(var i in this.items){
+			if(this.items[i].id === id){
 				return this.items[i];
 			}
 		}
@@ -42,14 +42,13 @@ Game.prototype = {
 			endY = startPos.y;
 		}
 
-		for(i in this.items){
+		for(var i in this.items){
 			var item = this.items[i];
 			var pos = item.position;
-			if(!item.canMove || item.playerId != this.playerId){
+			if(!item.canMove || item.playerId !== this.playerId){
 				continue;
 			}
-			if(pos.x >= startX && endX >= pos.x 
-				&& pos.y >= startY && endY >= pos.y ){
+			if(pos.x >= startX && endX >= pos.x && pos.y >= startY && endY >= pos.y ){
 				item.selected = true;
 				this.selectedItems.push(item);
 			} else {
@@ -57,4 +56,4 @@ Game.prototype = {
 			}
 		}
 	}
-}
+};

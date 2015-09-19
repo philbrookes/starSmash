@@ -1,5 +1,5 @@
 var Mover = function(){
-}
+};
 
 Mover.prototype = {
 	process: function(timeElapsed){
@@ -7,7 +7,7 @@ Mover.prototype = {
 	},
 	movement: function(timeElapsed){
 		//dont move if we're at the destination already
-	    if(this.position.x == this.destination.x && this.position.y == this.destination.y){
+	    if(this.position.x === this.destination.x && this.position.y === this.destination.y){
 	    	if(typeof this.arrived !== "undefined"){
 	        	this.arrived();
 	        }
@@ -32,7 +32,7 @@ Mover.prototype = {
 	    }
 	},
 	setDestination: function(position){
-		if(this.destination.x != position.x && this.destination.y != position.y){
+		if(this.destination.x !== position.x && this.destination.y !== position.y){
 			this.destination.copy(position);
 			this.player.game.sendUnitUpdate(this);
 		}
@@ -41,7 +41,7 @@ Mover.prototype = {
 		this.target = unit;
 		this.setDestination(unit.position);
 	}
-}
+};
 
 
 

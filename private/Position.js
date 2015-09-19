@@ -1,7 +1,7 @@
 Position = function(x, y) {
 	this.x = x;
 	this.y = y;
-}
+};
 
 Position.prototype = {
 	set: function(x, y) {
@@ -19,7 +19,7 @@ Position.prototype = {
 		this.y = pos.y;
 	},
 	equals: function(pos){
-		return (this.x == pos.x && this.y == pos.y);
+		return (this.x === pos.x && this.y === pos.y);
 	},
 	distance: function(pos){
 		var tx = pos.x - this.x,
@@ -32,6 +32,6 @@ Position.prototype = {
 	    rad = Math.atan2(ty,tx);
 	    return rad/Math.PI * 180;
 	}
-}
+};
 
 module.exports = Position;

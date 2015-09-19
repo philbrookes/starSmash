@@ -1,6 +1,6 @@
 Item = function(id){
 	this.id = id;
-	this.playerId;
+	this.playerId = 0;
 	this.canMove = false;
 	this.style = {};
 	this.position = {};
@@ -12,7 +12,7 @@ Item = function(id){
 	this.tapped = null;
 	this.image = null;
 	this.imageReady = false;
-}
+};
 
 Item.prototype = {
 	render: function(context, timeElapsed){
@@ -103,4 +103,4 @@ Item.prototype = {
     		this.position.y = this.destination.y;
 	    }
 	}
-}
+};
