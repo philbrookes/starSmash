@@ -1,37 +1,37 @@
 <html>
-	<head>
-		<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="/js/app.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#gatherer").click(function(){
-					client.buildUnit("gatherer");
-				});
-				$("#attacker").click(function(){
-					client.buildUnit("attacker");
-				});
-			});
-		</script>
-		<link rel="stylesheet" href="./style/style.css" />
-	</head>
-	<body>
-		<div id="game-area">
-			<div id="menu">
-				<span id="resources">Ore: 0</span>
-				<span class="hint">Build:</span>
-				<span id="gatherer" title="costs 3 ore">Gatherer</span>
-				<span id="attacker" title="costs 15 ore">Attacker</span>
-			</div>
-			<canvas 
-				id="canvas" 
-				width="640" 
-				height="480" 
-				style="
-					border: 1px solid #565656; 
-					width: 640px; 
-					height: 480px;"
-			></canvas>
-			<div id="waiting" style="display: none;">waiting for opponent to connect...</div>
-		</div>
-	</body>
+  <head>
+    <script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#gatherer").click(function(){
+          client.buildUnit("gatherer");
+        });
+        $("#attacker").click(function(){
+          client.buildUnit("attacker");
+        });
+      });
+    </script>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <div id="game-area">
+      <div id="menu">
+        <span id="resources">Ore: 0</span>
+        <span class="hint">Build:</span>
+        <span id="gatherer" title="costs 3 ore">Gatherer</span>
+        <span id="attacker" title="costs 15 ore">Attacker</span>
+      </div>
+      <canvas 
+        id="canvas" 
+        width="640" 
+        height="480" 
+        style="
+          border: 1px solid #565656; 
+          width: 640px; 
+          height: 480px;"
+      ></canvas>
+      <div id="waiting" style="display: none;">waiting for opponent to connect...</div>
+    </div>
+  </body>
 </html>

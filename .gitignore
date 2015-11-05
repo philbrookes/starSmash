@@ -1,0 +1,5 @@
+.idea
+nbproject
+node_modules
+private/npm-debug.log
+public_html/js/app.js
